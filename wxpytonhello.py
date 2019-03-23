@@ -18,7 +18,7 @@ class HelloFrame(wx.Frame):
         pnl = wx.Panel(self)
 
         # and put some text with a larger bold font on it
-        st = wx.StaticText(pnl, label="Hello World!", pos=(25,25))
+        st = wx.StaticText(pnl, label="Hola World!", pos=(25,25))
         font = st.GetFont()
         font.PointSize += 10
         font = font.Bold()
