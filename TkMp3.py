@@ -15,6 +15,7 @@ class Mp3Panel(wx.Panel):
         self.list_ctrl.InsertColumn(0, 'Artist', width=140)
         self.list_ctrl.InsertColumn(1, 'Album', width=140)
         self.list_ctrl.InsertColumn(2, 'Title', width=200)
+        self.list_ctrl.InsertColumn(3, 'Year', width=200)
         main_sizer.Add(self.list_ctrl, 0, wx.ALL | wx.EXPAND, 5)        
         edit_button = wx.Button(self, label='Edit')
         edit_button.Bind(wx.EVT_BUTTON, self.on_edit)
@@ -29,6 +30,7 @@ class Mp3Panel(wx.Panel):
         self.list_ctrl.InsertColumn(1, 'Album', width=140)
         self.list_ctrl.InsertColumn(2, 'Title', width=200)
         self.list_ctrl.InsertColumn(3, 'Year', width=200)
+        self.list_ctrl.InsertColumn(4, 'Genre', width=200)
 
         mp3s = glob.glob(folder_path + "/*.mp3")
         
@@ -36,10 +38,20 @@ class Mp3Panel(wx.Panel):
         index = 0
         for mp3 in mp3s:
             mp3_object = eyed3.load(mp3)
+            
             self.list_ctrl.InsertItem(index, mp3_object.tag.artist)
             self.list_ctrl.SetItem(index, 1, mp3_object.tag.album)
             self.list_ctrl.SetItem(index, 2, mp3_object.tag.title)
-            '''self.list_ctrl.SetItem(index, 3, mp3_object.tag.date) '''
+            
+            '''self.list_ctrl.SetItem(index, 3, mp3_object.tag.genre)'''
+            self.list_ctrl.SetItem(index, 3, str(mp3_object.tag.recording_date))
+            '''
+            if audiofile.tag is None:
+            audiofile.tag = eyed3.id3.Tag()
+            audiofile.tag.file_info = eyed3.id3.FileInfo("foo.id3")
+            audiofile.tag.artist=unicode(artist, "utf-8") 
+            '''
+           
             mp3_objects.append(mp3_object)
             self.row_obj_dict[index] = mp3_object
             index += 1
