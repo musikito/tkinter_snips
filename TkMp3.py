@@ -34,7 +34,7 @@ class Mp3Panel(wx.Panel):
         self.list_ctrl.InsertColumn(3, 'Year', width=200)
 
         mp3s = glob.glob(folder_path + "/*.mp3")
-        print(mp3s)
+        
         mp3_objects = []
         index = 0
         for mp3 in mp3s:
